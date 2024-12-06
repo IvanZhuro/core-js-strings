@@ -37,8 +37,13 @@ function getStringLength(value) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  if (typeof value === 'object' && value !== null) {
+    if (value.valueOf().length >= 0) {
+      return typeof value.valueOf() === 'string';
+    }
+  }
+  return typeof value === 'string';
 }
 
 /**
@@ -314,8 +319,16 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  return (
+    str.toLowerCase().replace(/[\s,!?]/g, '') ===
+    str
+      .toLowerCase()
+      .replace(/[\s,!?]/g, '')
+      .split('')
+      .reverse()
+      .join('')
+  );
 }
 
 /**
