@@ -151,8 +151,13 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  if (str.indexOf(value) >= 0) {
+    return str
+      .slice(0, str.indexOf(value))
+      .concat(str.slice(str.indexOf(value) + value.length, str.length));
+  }
+  return str;
 }
 
 /**
@@ -167,8 +172,13 @@ function removeFirstOccurrences(/* str, value */) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  if (str.lastIndexOf(value) >= 0) {
+    return str
+      .slice(0, str.lastIndexOf(value))
+      .concat(str.slice(str.lastIndexOf(value) + value.length, str.length));
+  }
+  return str;
 }
 
 /**
@@ -186,9 +196,8 @@ function removeLastOccurrences(/* str, value */) {
 function sumOfCodes(str) {
   let sum = 0;
   if (typeof str === 'string') {
-    for (let index = 0; index < str.length; ) {
+    for (let index = 0; index < str.length; index += 1) {
       sum += str.charCodeAt(index);
-      index += 1;
     }
   }
   return sum;
@@ -302,8 +311,13 @@ function containsSubstring(str, substring) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  if (str === null) {
+    return 0;
+  }
+  return str.toLowerCase().match(/[aeiouy]/gi) === null
+    ? 0
+    : str.toLowerCase().match(/[aeiouy]/gi).length;
 }
 
 /**
@@ -498,8 +512,67 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cards = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+  for (let index = 0; index < cards.length; index += 1) {
+    if (cards[index] === value) {
+      return index;
+    }
+  }
+  return value;
 }
 
 module.exports = {
