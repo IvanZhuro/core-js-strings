@@ -357,8 +357,15 @@ function isPalindrome(str) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  const array = sentence.split(' ');
+  let word = array[0];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const element of array) {
+    // eslint-disable-next-line no-unused-expressions
+    word.length < element.length ? (word = element) : false;
+  }
+  return word;
 }
 
 /**
@@ -484,8 +491,39 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const enocodestr = str.split('');
+  for (let index = 0; index < enocodestr.length; index += 1) {
+    if (enocodestr[index].match(/[a-m]/g) !== null) {
+      enocodestr[index] = String.fromCharCode(
+        enocodestr[index].charCodeAt(0) + 13
+      );
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+    if (enocodestr[index].match(/[n-z]/g) !== null) {
+      enocodestr[index] = String.fromCharCode(
+        enocodestr[index].charCodeAt(0) - 13
+      );
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+    if (enocodestr[index].match(/[A-M]/g) !== null) {
+      enocodestr[index] = String.fromCharCode(
+        enocodestr[index].charCodeAt(0) + 13
+      );
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+    if (enocodestr[index].match(/[N-Z]/g) !== null) {
+      enocodestr[index] = String.fromCharCode(
+        enocodestr[index].charCodeAt(0) - 13
+      );
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+  }
+  return enocodestr.join('');
 }
 
 /**
